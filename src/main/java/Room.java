@@ -5,6 +5,7 @@ public class Room {
     private boolean isOccupied;
     private boolean isDirty;
 
+    // getters and setters
     public int getNumberOfBeds() {
         return numberOfBeds;
     }

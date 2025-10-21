@@ -5,12 +5,14 @@ public class Reservation {
     private int numberOfNights;
     private boolean isWeekend;
 
+    //  constructor
     public Reservation(String roomType, int numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
     }
 
+    // getters and setters
     public String getRoomType() {
         return roomType;
     }
