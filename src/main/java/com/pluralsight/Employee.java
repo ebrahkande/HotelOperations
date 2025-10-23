@@ -1,28 +1,32 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+
 public class Employee {
-    private int employeeId;
+    private int employeeID;
     private String name;
     private String department;
     private double payRate;
-    private double hoursWorked;
+    private int hoursWorked;
+    private double startTime;
 
-    // constructor
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
-        this.employeeId = employeeId;
+    // Constructor
+    public Employee(int employeeId, String name, String department, double payRate, int hoursWorked) {
+        this.employeeID = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
+        this.startTime = 0;
     }
 
-    // getters and setters
-    public int getEmployeeId() {
-        return employeeId;
+    // Getters and Setters
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
     public String getName() {
@@ -49,32 +53,56 @@ public class Employee {
         this.payRate = payRate;
     }
 
-    public double getHoursWorked() {
+    public int getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(double hoursWorked) {
+    public void setHoursWorked(int hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 
-    // derived getters
-    public double getTotalPay() {
-        // calculate pay for regular hours, overtime rate, and overtime hours
-        double regularPay = getRegularHours() * payRate;
-        double overtimeRate = payRate * 1.5;
-        double overtimePay = getOvertimeHours() * overtimeRate;
-        return regularPay + overtimePay;
-    }
-
     public double getRegularHours() {
+        /* returns the lesser of total hoursWorked or the 40.0 cap */
         return Math.min(hoursWorked, 40.0);
     }
 
-    public int getOvertimeHours() {
+    public double getOvertimeHours() {
+        /* if hoursWorked is > 40, return the difference. Otherwise, return 0. */
         if (hoursWorked > 40) {
-            return (int) (hoursWorked - 40.0);
+            return hoursWorked - 40.0;
         } else {
-            return (int) 0.0;
+            return 0.0;
         }
     }
+
+    public double getTotalPay() {
+        double regularPay = getRegularHours() * payRate;
+        double overtimeRate = payRate * 1.5;
+        double overtimePay = getOvertimeHours() * overtimeRate;
+
+        return regularPay + overtimePay;
+    }
+
+    // New method to capture time start
+    public void punchIn(double time){
+        this.startTime = time;
+    }
+
+    public void punchOut(double time){
+        this.hoursWorked += (int) (time - this.startTime);
+    }
+
+    // Overload new method to capture time start
+    public void punchOut(){
+        LocalDateTime now = LocalDateTime.now();
+        double currentTime = now.getHour() + (now.getMinute() / 60.0);
+
+        this.punchOut(currentTime);
+    }
+
+    public void punchTimeCard(double punchInTime, double punchOutTime){
+        this.punchIn(punchInTime);
+        this.punchOut(punchOutTime);
+    }
+
 }

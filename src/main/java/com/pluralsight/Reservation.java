@@ -5,14 +5,14 @@ public class Reservation {
     private int numberOfNights;
     private boolean isWeekend;
 
-    //  constructor
+    //  Constructor
     public Reservation(String roomType, int numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
     }
 
-    // getters and setters
+    // Getters and Setters
     public String getRoomType() {
         return roomType;
     }
@@ -47,7 +47,9 @@ public class Reservation {
             return 0.0;
         }
     }
-    public double getReservationTotal() {
+
+
+public double getReservationTotal() {
         // get the base price for the room type
         double basePricePerNight = getPrice();
         double effectivePricePerNight = basePricePerNight;

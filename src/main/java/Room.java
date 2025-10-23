@@ -5,7 +5,15 @@ public class Room {
     private boolean isOccupied;
     private boolean isDirty;
 
-    // getters and setters
+    // Constructor
+    public Room(int numberOfBeds, double price, boolean isOccupied, boolean isDirty) {
+        this.numberOfBeds = numberOfBeds;
+        this.getPrice = getPrice;
+        this.isOccupied = isOccupied;
+        this.isDirty = isDirty;
+    }
+
+    // Getters and Setters
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
@@ -38,11 +46,29 @@ public class Room {
         isDirty = dirty;
     }
 
-    public boolean isAvailable(){
-        if (!this.isDirty() && !this.isOccupied()){
+    public boolean isAvailable() {
+        // Available if NOT occupied AND NOT dirty
+        return !isOccupied && !isDirty;
+    }
+
+    // Operational methods
+    public boolean checkIn() {
+        if(!this.isDirty() && !this.isOccupied()) {
             return true;
         }
 
         return false;
+    }
+
+    public void checkOut() {
+        // the room is now free, but still needs to be cleaned
+        this.isOccupied = false;
+        System.out.println("Room checked out. Now free, but still dirty.");
+    }
+
+    public void cleanRoom() {
+        // the room is no longer dirty, making it available for check-in
+        this.isDirty = false;
+        System.out.println("Room cleaned. Ready for the next guest.");
     }
 }
