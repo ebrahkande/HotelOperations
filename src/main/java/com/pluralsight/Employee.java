@@ -11,12 +11,12 @@ public class Employee {
     private double startTime;
 
     // Constructor
-    public Employee(int employeeId, String name, String department, double payRate, int hoursWorked) {
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
-        this.hoursWorked = hoursWorked;
+        this.hoursWorked = (int) hoursWorked;
         this.startTime = 0;
     }
 
@@ -100,9 +100,11 @@ public class Employee {
         this.punchOut(currentTime);
     }
 
-    public void punchTimeCard(double punchInTime, double punchOutTime){
+    public boolean punchTimeCard(double punchInTime){
         this.punchIn(punchInTime);
+        double punchOutTime = 0;
         this.punchOut(punchOutTime);
+        return false;
     }
 
 }
