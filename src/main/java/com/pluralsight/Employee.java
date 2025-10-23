@@ -3,7 +3,7 @@ package com.pluralsight;
 import java.time.LocalDateTime;
 
 public class Employee {
-    private int employeeID;
+    private String employeeID;
     private String name;
     private String department;
     private double payRate;
@@ -11,7 +11,7 @@ public class Employee {
     private double startTime;
 
     // Constructor
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
+    public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeId;
         this.name = name;
         this.department = department;
@@ -21,11 +21,11 @@ public class Employee {
     }
 
     // Getters and Setters
-    public int getEmployeeID() {
+    public String getEmployeeID() {
         return employeeID;
     }
 
-    public void setEmployeeID(int employeeID) {
+    public void setEmployeeID(String employeeID) {
         this.employeeID = employeeID;
     }
 
